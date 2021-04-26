@@ -2,8 +2,7 @@ __CONTENTS__
 ===
 
 - [#how-to-open-ubuntu-terminal-](#how-to-open-ubuntu-terminal-)
-- [#c-pgm-in-ubuntu](#c-pgm-in-ubuntu)
-
+- [#c-in-linux](#c-in-linux)
 
 [install ubuntu in wsl](https://wiki.ubuntu.com/WSL?&_ga=2.232980126.1893481185.1618394455-755482584.1618394455#Running_Graphical_Applications)
 
@@ -52,6 +51,8 @@ See windows c, d, e drive in UBUNTU(installed in wsl)   ✔️
 LINUX CONFIGURATIONS
 ```bash
 lsb_release -a   # shows the ubuntu version installed
+ps -el           # to see currently active process
+ps               #
 
 whoami          # tells USERNAME
 
@@ -253,14 +254,18 @@ cp <pathOfFile> <pathWhereWeNeedToCopyFile>
 cp file.txt BackupFile.txt
 ```
 
-# C pgm in ubuntu
-
+# c in linux
 ```bash
-gcc -o code code.c    # to compile code.c file 
-./code                # to run executable file(code.exe) of the code.cpp 
+# first install g++ in linux using following cmd
+sudo apt install g++    # to install g++
 
-g++ -o code code.cpp  # to compile code.cpp file 
-./code                # to run executable file(code.exe) of the code.cpp 
+gcc -o code.exe code.c    # to compile code.c file 
+./code.exe                # to run executable file(code.exe) of the code.cpp 
+
+g++ -o code.exe code.cpp  # to compile code.cpp file 
+./code.exe                # to run executable file(code.exe) of the code.cpp 
+
+
 ```
 
 
@@ -276,12 +281,15 @@ sudo # Switch User & DO
 
 sudo apt update         # to update
 
+# ~~~~~~~~~~~~~~~~~~~~
+sudo apt install g++    # to install g++
 sudo apt install tree   # now we can see our dir structure using "tree" cmd in our current dir
 tree                     # shows all dir/subdir/file recursively
 tree -a                  # displays hidden files/dir as well
 
-sudo apt list --installed          # to see the package installed so far
+# ~~~~~~~~~~~~~~~~~~~~
 
+sudo apt list --installed          # to see the package installed so far
 sudo apt remove package_name        # to remove a package
 ```
 
