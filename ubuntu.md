@@ -4,6 +4,13 @@ __CONTENTS__
 - [#how-to-open-ubuntu-terminal-](#how-to-open-ubuntu-terminal-)
 - [#c-in-linux](#c-in-linux)
 
+
+
+#  Windows Subsystem for Linux (WSL) 
+a new Windows 10 feature that enables you to **run native Linux command-line tools directly on Windows**, alongside your traditional Windows desktop
+
+Ubuntu is one of Linux distribution easily available on WSL.
+
 [install ubuntu in wsl](https://wiki.ubuntu.com/WSL?&_ga=2.232980126.1893481185.1618394455-755482584.1618394455#Running_Graphical_Applications)
 
 Ubuntu 20.04 LTS (Focal) is the current LTS release, supporting both x64 and ARM64 architecture
@@ -29,6 +36,15 @@ ubuntu /
 
 wsl --list --all       # view distribution of linux install in ur windows
 wsl -l -v 
+```
+
+```bash
+man <anyCmdKeyword>  # to know about what a cmd does
+
+# e.g.
+
+man ls
+man ps
 ```
 
 
@@ -58,6 +74,7 @@ whoami          # tells USERNAME
 
 uname -a         # tells architecture 32 bit or 64 bit
 
+# echo variables
 echo $USER
 echo $HOME
 echo $PATH
@@ -71,6 +88,25 @@ comment in ubuntu
 
 some cmd    # a inline cmntt side by side to describe this cmd
 ```
+
+**An option**, also referred to as a ***flag or a switch***, 
+
+is a single-letter or full word that modifies the behavior of a command in some predetermined way.
+
+e.g.
+```bash
+--help
+--version
+
+-a 
+--all
+
+-b
+--bytes
+
+-p
+```
+
 
 Statements
 ```bash
@@ -154,7 +190,7 @@ mkdir d1 d2 d3             # makes dir d1, d2, d3 in the currecnt dir}
 mkdir a/b/c                # makes dir  { [ (c inside b) inside a] inside current dir }, error comes if a & a/b dir  doesn't already exist
 # hence use -p switch 
 mkdir -p a/b/c             # makes dir  { [ (c inside b) inside a] inside current dir } 
-# p : an option or switch which means "create a parent dir too"
+# -p : an option or switch which means "create a parent dir too"
 ```
 ```bash
 / # often refers to as root directory
@@ -266,6 +302,94 @@ g++ -o code.exe code.cpp  # to compile code.cpp file
 ./code.exe                # to run executable file(code.exe) of the code.cpp 
 
 
+
+```
+
+To create a new process, in UNIX, the `fork()` system call is use
+```C++
+#include<bits/stdc++.h>  
+#include <sys/types.h> 
+#include <sys/wait.h> // for wait()
+#include <unistd.h>   // for fork()
+#include <stdlib.h>
+using namespace std;
+
+#define co cout<<
+#define test() ll T; cin>>T; for(ll tc=0;tc<T;tc++)
+
+
+/*
+    getpid() : returns process id of a process
+
+    wait()   : can be invoked by parent
+               when it wants to wait for its child to finish termination,
+               after which parent can continue its execution 
+
+    exit()   : invoked when processs has finished execution
+               it deallocates the resources(like I/O buffer, physical/virtual mem, open files) allocated to the process
+
+
+    parent process - sorts the array in descending order
+    chid   process - sorts the array in ascending  order
+
+
+
+    Executing parent first 
+    is not usually not a good idea since it may creates an orphan process
+
+    When a process' parent dies before the child(withour waiting for the child to terminate),
+    the OS assigns the child process to the "init" process or PID 1. i.e. 
+    The init process "adopts" the child process and becomes its parent.
+
+    This means that now when the child process exits 
+    the new parent (init) must call wait() to get its exit code 
+    or its process table entry remains forever and it becomes a zombie
+*/
+
+int main(){
+
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt","r",stdin);
+    //     freopen("output.txt","w",stdout);
+    // #endif
+
+    int data = 7;
+
+    int pid = fork();
+
+    // return code for fork() is -1 in case fork call fails
+    if (pid < 0){
+        cout << "cannot fork\n";
+    }
+
+    // return code for fork() is non-zero for parent process
+    else if( pid > 0){
+
+        cout << "\nPARENT PROCESS : " << getpid() <<endl;
+
+        // some code
+        // to manipulate int data;
+
+        wait(NULL);
+        exit(0);                // exit with status 0
+    }
+
+    // return code for fork() is zero for child process
+    else if( pid == 0){
+
+        sleep(20);     // process does some work that takes 20 seconds
+
+        // some code 
+        // to manipulate int data;
+
+        exit(0);            // exit with status 0
+    }
+
+    return 0;
+}
+/*
+*/
+
 ```
 
 
@@ -280,6 +404,7 @@ On a Ubuntu system the first user created when the system is installed is consid
 sudo # Switch User & DO
 
 sudo apt update         # to update
+sudo apt upgrade         # to update
 
 # ~~~~~~~~~~~~~~~~~~~~
 sudo apt install g++    # to install g++
@@ -293,6 +418,42 @@ sudo apt list --installed          # to see the package installed so far
 sudo apt remove package_name        # to remove a package
 ```
 
+
+USER MNGMT
+---
+```bash
+sudo add <NEW_USERNAME>
+
+# then it asks pswd of current user
+
+# then it to set new pswd for new user a/c
+# then it to confirm by retypin new pswd for new user a/c
+
+
+
+sudo deluser  <NEW_USERNAME>
+# Deleting an account does not remove their respective home folder. It is up to you whether or not you wish to delete the folder manually or keep it according to your desired retention policies.
+```
+
+
+How to Switch Users in Ubuntu and Other Linux Distributions
+---
+```bash
+# to see current user
+whoami
+
+# to switch/login as another user
+su another_user_name
+
+# then prompt will come to enter pswed for another_user
+# simply enter the paswd for that user
+# then hit enter
+# & you are in
+
+
+exit 
+# to exit current user session
+```
 file EDITORS FOR LINUX OS
 ===
 - gedit
