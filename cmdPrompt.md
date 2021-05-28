@@ -62,6 +62,7 @@ echo %OS%
 ===
 e.g. `C:\Users\harsh chauhan>`
 ```
+dir             : lists directory contents
 tree            : list(recursively) all subfolder in current dir, ✔️
 
 cd        :   prints dir we r currently in
@@ -75,10 +76,10 @@ cd/					:	to come back to current drive
 `In windows we use backslash to traverse to folder e.g  E:\nit\sem4 `
 
 ```
-rmdir folderName	: 	to remove the "folder" -> folderName in the current dir 
+☠️ rmdir folderName	: 	to remove the "folder" -> folderName in the current dir 
 
-rd /s myproject		:	force fully delete all folder in "myproject" folder in current dir 
-rmdir /s myproject		:	force fully delete all folder in "myproject" folder in current dir 
+☠️ rd /s myproject		:	force fully delete all folder in "myproject" folder in current dir 
+☠️ rmdir /s myproject		:	force fully delete all folder in "myproject" folder in current dir 
 
 
 rename oldName.pdf newName.pdf 		  :       to rename a file
@@ -104,11 +105,29 @@ SYSTEM SPECIFIC
 systeminfo                // to see info of our sys.
 ```
 
+to chk whether any package installed
+---
+succesfully in windows10
+```
+g++ --version
+gcc --version
+java --version
+node --version
+npm --version
+git --version
+bash --version
+wsl -l -v   # to chk linux distribution installed as wsl in our windows PC
 
+
+c++ --version
+cpp --version
+```
 
 LAN 
 ===
 ```
+hostname
+
 ipconfig /all             // to see MAC address of our sys.
 
 
