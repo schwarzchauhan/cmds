@@ -151,6 +151,8 @@ rm -r dirName   # r, means really, & recursively deletes all files/folders in th
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 ls 
 ls -a           # shows hidden/dir files as well, switch -a means <all>
+ls -l           # to see dir/files
+
 ls /mnt
 ls /mnt/   # shows all drive in system
 ls /SUB_DIR_NAME/SUB_SUB_DIR_NAME  # shows all file/folder in the specified subdir within a subdir
@@ -300,96 +302,6 @@ gcc -o code.exe code.c    # to compile code.c file
 
 g++ -o code.exe code.cpp  # to compile code.cpp file 
 ./code.exe                # to run executable file(code.exe) of the code.cpp 
-
-
-
-```
-
-To create a new process, in UNIX, the `fork()` system call is use
-```C++
-#include<bits/stdc++.h>  
-#include <sys/types.h> 
-#include <sys/wait.h> // for wait()
-#include <unistd.h>   // for fork()
-#include <stdlib.h>
-using namespace std;
-
-#define co cout<<
-#define test() ll T; cin>>T; for(ll tc=0;tc<T;tc++)
-
-
-/*
-    getpid() : returns process id of a process
-
-    wait()   : can be invoked by parent
-               when it wants to wait for its child to finish termination,
-               after which parent can continue its execution 
-
-    exit()   : invoked when processs has finished execution
-               it deallocates the resources(like I/O buffer, physical/virtual mem, open files) allocated to the process
-
-
-    parent process - sorts the array in descending order
-    chid   process - sorts the array in ascending  order
-
-
-
-    Executing parent first 
-    is not usually not a good idea since it may creates an orphan process
-
-    When a process' parent dies before the child(withour waiting for the child to terminate),
-    the OS assigns the child process to the "init" process or PID 1. i.e. 
-    The init process "adopts" the child process and becomes its parent.
-
-    This means that now when the child process exits 
-    the new parent (init) must call wait() to get its exit code 
-    or its process table entry remains forever and it becomes a zombie
-*/
-
-int main(){
-
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt","r",stdin);
-    //     freopen("output.txt","w",stdout);
-    // #endif
-
-    int data = 7;
-
-    int pid = fork();
-
-    // return code for fork() is -1 in case fork call fails
-    if (pid < 0){
-        cout << "cannot fork\n";
-    }
-
-    // return code for fork() is non-zero for parent process
-    else if( pid > 0){
-
-        cout << "\nPARENT PROCESS : " << getpid() <<endl;
-
-        // some code
-        // to manipulate int data;
-
-        wait(NULL);
-        exit(0);                // exit with status 0
-    }
-
-    // return code for fork() is zero for child process
-    else if( pid == 0){
-
-        sleep(20);     // process does some work that takes 20 seconds
-
-        // some code 
-        // to manipulate int data;
-
-        exit(0);            // exit with status 0
-    }
-
-    return 0;
-}
-/*
-*/
-
 ```
 
 
@@ -453,6 +365,7 @@ su another_user_name
 
 exit 
 # to exit current user session
+logout
 ```
 file EDITORS FOR LINUX OS
 ===
